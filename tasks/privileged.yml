@@ -1,0 +1,21 @@
+---
+- name: Install libcap
+  package:
+    name: libcap
+
+- name: Allow Logstash to open privileged ports
+  command: "setcap 'cap_net_bind_service=+ep' /usr/share/logstash/jdk/bin/java"
+  changed_when: false
+  notify:
+    - Restart Logstash noauto
+
+- name: Enable ldconfig to search for libjli
+  template:
+    src: java-libjli.conf.j2
+    dest: /etc/ld.so.conf.d/java-libjli.conf
+    owner: root
+    group: root
+    mode: 0444
+  notify:
+    - call ldconfig
+    - Restart Logstash noauto

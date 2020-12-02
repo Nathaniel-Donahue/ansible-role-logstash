@@ -24,6 +24,10 @@ Role Variables
 * *logstash_config_backup*: Keep backups of all changed configuration (defualt: `no`)
 * *logstash_manage_yaml*: Manage and overwrite `logstash.yml` (default: `true`)
 
+The following variable will make changes to your operating system if set to true
+
+* *logstash_privileged*: Allow Logstash to open privileged ports (default: `false`)
+
 If `logstash.yml` is managed, the following settings apply.
 
 * *logstash_config_autoreload*: Enable autoreload of Logstash configuration (default: `true`)
